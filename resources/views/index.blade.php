@@ -62,15 +62,13 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
+                            <td><img src="{{ Auth::user()->photo_url }}" width="30" height="30" style="border-radius: 50%" /> <span>{{ $user->name }}</span></td>
                             <td><a href="javascript:;" data-id="{{$user->id}}" 
                                     class="btn btn-primary btn-sm follow-user">
                                     @if(in_array(Auth::user()->id, $user->followers->pluck('id')->toArray()??[])){{'Unfollow'}}@else{{'Follow'}}@endif

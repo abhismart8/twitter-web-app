@@ -10,6 +10,9 @@ const tweet = (url, tweet, $this) => {
                     message: response.data.message,
                 });
                 document.getElementById('tweet-content').value = '';
+                setTimeout(function(){
+                    window.location.reload();
+                }, 1000);
             }else{
                 iziToast.error({
                     message: response.data.message,
