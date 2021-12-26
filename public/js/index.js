@@ -1,5 +1,4 @@
-const tweet = (url, tweet) => {
-    console.log(tweet);
+const tweet = (url, tweet, $this) => {
     if(tweet != ''){
         axios.post(url, {
             content: tweet,
@@ -10,6 +9,7 @@ const tweet = (url, tweet) => {
                 iziToast.success({
                     message: response.data.message,
                 });
+                document.getElementById('tweet-content').value = '';
             }else{
                 iziToast.error({
                     message: response.data.message,
@@ -28,4 +28,26 @@ const tweet = (url, tweet) => {
             message: message,
         });
     }
+}
+
+const follow = (url, followedId, $this) => {
+    axios.post(url, {
+        followed_id: followedId,
+        follower_id: window.userId
+    })
+    .then(function (response) {
+        if(response.data.status == 'success'){
+            $this.html(response.data.key);
+            iziToast.success({
+                message: response.data.message,
+            });
+        }else{
+            iziToast.error({
+                message: response.data.message,
+            });
+        }
+    })
+    .catch(function (err) {
+        console.log(err)
+    })
 }

@@ -53,9 +53,9 @@ class Tweet extends Model
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
-    public function scopeUser($query, $userId)
+    public function scopeUsers($query, $usersIdArray)
     {
-        return $query->where('user_id',$userId);
+        return $query->whereIn('user_id',$usersIdArray);
     }
 
     public function scopeSorting($query, $sort)

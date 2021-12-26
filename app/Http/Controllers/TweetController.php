@@ -18,6 +18,10 @@ class TweetController extends Controller
 
     public function create(Request $request)
     {
-        return $this->tweetRepository->create($request->all());
+        $data = [
+            'user_id' => $request['user_id'],
+            'content' => $request['content']
+        ];
+        return $this->tweetRepository->create($data);
     }
 }

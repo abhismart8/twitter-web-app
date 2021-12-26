@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Follower extends Model
+class Follow extends Model
 {
     use HasFactory;
 
@@ -39,8 +39,8 @@ class Follower extends Model
      * fillable properties
      */
     protected $fillable = [
-        'follower_id ',
-        'followed_id'
+        'followed_id',
+        'follower_id'
     ];
 
     protected $casts = [

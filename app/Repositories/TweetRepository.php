@@ -10,7 +10,14 @@ class TweetRepository
 {
     public static function getTweets($userId, $sort=null)
     {
-        $tweets = Tweet::user($userId)
+        // getting all the user you have followed
+        $usersIdArray = getAllFollowed($userId);
+
+        // sending current user into the array as well
+        $usersIdArray[] = $userId;
+
+        // extracting tweets based on users, and other attributes
+        $tweets = Tweet::users($usersIdArray)
         ->sorting($sort)
         ->with('tweeter');
 

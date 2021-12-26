@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,12 @@ Route::post('register', [LoginController::class, 'register'])->name('register');
 /*--------------------------- Route Group with Auth Middleware ---------------------------*/
 Route::middleware(['auth'])->group(function () {
 
-    /*---------------------------  Homepage ---------------------------*/
+    /*--------------------------- Homepage Get ---------------------------*/
     Route::get('/', [HomeController::class, 'index'])->name('index');
 
-    /*---------------------------  Tweet ---------------------------*/
+    /*--------------------------- Create Tweet ---------------------------*/
     Route::post('tweet', [TweetController::class, 'create'])->name('tweet');
+
+    /*--------------------------- Follow ---------------------------*/
+    Route::post('follow', [FollowController::class, 'create'])->name('follow');
 });

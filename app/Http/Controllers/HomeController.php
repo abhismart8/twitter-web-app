@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Tweet;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\TweetRepository;
+
+use App\Models\Tweet;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -19,9 +21,11 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $tweets = $this->tweetRepository->getTweets(Auth::user()->id, ['created_at', 'desc'])->get();
+        $users = User::users(Auth::user()->id)->get();
 
         return view('index', [
-            'tweets' => $tweets
+            'tweets' => $tweets,
+            'users' => $users
         ]);
     }
 }

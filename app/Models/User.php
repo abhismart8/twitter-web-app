@@ -65,4 +65,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Tweet');
     }
+
+    public function scopeUsers($query, $userId)
+    {
+        return $query->whereNotIn('id',[$userId]);
+    }
+
+    public function followers(){
+        return $this->belongsToMany('App\Models\User','followers', 'followed_id', 'follower_id');
+    }
 }

@@ -79,13 +79,14 @@ class LoginController extends Controller
     }
 
     public function register(Request $request){
-        $user = User::where('email', $request['email'])->first();
+        $data = $request['data'];
+        $user = User::where('email', $data['email'])->first();
         if($user){
             $redirectUrl = route('login');
             return response()->json(['status' => 'user_exists', 'message' => 'Already registered. Please login',
             'redirectUrl' => $redirectUrl]);
         }
-        $data = $request['data'];
+        
         $data['id'] = Str::uuid()->toString();
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);

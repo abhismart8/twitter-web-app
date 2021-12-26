@@ -35,6 +35,36 @@
     width: 60%;
     display: inline-block;
 }
-.home-scroll .column {
+/* .home-scroll .column {
     overflow-y: scroll;
+} */
+
+/* scrolling a div*/
+div.column, div.column {
+    display: block;
+}
+div.column {
+    /* Set the height of table body */
+    max-height: 676px; 
+        
+    /* Set vertical scroll */
+    overflow-y: auto;
+        
+    /* Hide the horizontal scroll */
+    overflow-x: hidden; 
+}
+
+/* scrolling a table */
+/* table.scrolldown tbody, table.scrolldown thead {
+    display: block;
+}    */
+table.scrolldown tbody {
+        
+    /* Set the height of table body */
+    max-height: 500px; 
+        
+    /* Set vertical scroll */
+    overflow-y: auto;
+        
+    /* Hide the horizontal scroll */
 }

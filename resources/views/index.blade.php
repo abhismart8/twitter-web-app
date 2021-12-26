@@ -22,11 +22,11 @@
                     <img src="{{ Auth::user()->photo_url }}" width="40" height="40" style="border-radius: 50%" />
                     <span> {{ Auth::user()->name }} </span>
                 </p>
-                <a href="/logout" class="btn btn-primary"> Logout </a>
+                <a href="/logout" class="btn btn-primary btn-sm"> Logout </a>
             </div>
         </div>
     </div>
-    <div class="col-sm-5 column">
+    <div class="col-sm-5 column scrolldown">
         <div class="form-group mt-30">
             <h3> Home </h3>
             <div class="form-group mt-30">
@@ -39,17 +39,47 @@
             @foreach(($tweets??[]) as $tweet)
             <div class="form-group" style="border: 1px solid grey; border-radius: 5px;">
                 <div class="ml-15" style="margin-top: 3px;">
-                    <h4> <img src="{{ Auth::user()->photo_url }}" width="30" height="30" style="border-radius: 50%" /> {{ $tweet->tweeter->name }} </h4>
+                    <span style="float: right; font-size: 12px;" class="mr-15">{{ $tweet->created_at->diffForHumans() }}</span>
+                    <h4> <img src="{{ Auth::user()->photo_url }}" width="30" height="30" style="border-radius: 50%" /> 
+                        {{ $tweet->tweeter->name }} 
+                    </h4>
                     <p> {{ $tweet->content }} </p>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-    <div class="col-sm-4 text-center column">
+    <div class="col-sm-4 text-center">
         <div class="form-group search-bar mt-15">
             <input type="text" name="search" id="search-box" autocomplete="off" class="form-control" value="" placeholder="Search Twitter">
             <a class=""><img src="{{asset('images/search.svg')}}" alt="search"></a>
+        </div>
+
+        <div class="form-group mt-30">
+            <h4>Who to follow</h4>
+            <div class="table-responsive" id="users-table">
+                <table class="table listings_table scrolldown">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td><a href="javascript:;" data-id="{{$user->id}}" 
+                                    class="btn btn-primary btn-sm follow-user">
+                                    @if(in_array(Auth::user()->id, $user->followers->pluck('id')->toArray()??[])){{'Unfollow'}}@else{{'Follow'}}@endif
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -64,5 +94,10 @@
     document.getElementById('tweetbtn').addEventListener('click', function(){
         tweet("{{route('tweet')}}", document.getElementById('tweet-content').value);
     });
+
+    // follow
+    $('.follow-user').on('click', function(){
+        follow("{{route('follow')}}", $(this).attr('data-id'), $(this))
+    })
 </script>
 @endpush
