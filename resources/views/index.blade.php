@@ -40,7 +40,7 @@
             <div class="form-group" style="border: 1px solid grey; border-radius: 5px;">
                 <div class="ml-15" style="margin-top: 3px;">
                     <span style="float: right; font-size: 12px;" class="mr-15">{{ $tweet->created_at->diffForHumans() }}</span>
-                    <h4> <img src="{{ Auth::user()->photo_url }}" width="30" height="30" style="border-radius: 50%" /> 
+                    <h4> <img src="{{ $tweet->tweeter->photo_url }}" width="30" height="30" style="border-radius: 50%" /> 
                         {{ $tweet->tweeter->name }} 
                     </h4>
                     <p> {{ $tweet->content }} </p>
