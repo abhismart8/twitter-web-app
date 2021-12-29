@@ -86,8 +86,6 @@
 @push('post-scripts')
 <script src="{{ asset('js/index.js') }}"></script>
 <script>
-    window.userId = "{{Auth::user()->id}}";
-
     // create tweet
     document.getElementById('tweetbtn').addEventListener('click', function(){
         tweet("{{route('tweet')}}", document.getElementById('tweet-content').value);

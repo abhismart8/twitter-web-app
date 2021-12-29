@@ -20,9 +20,8 @@ class FollowController extends Controller
     {
         $data = [
             'followed_id' => $request['followed_id'],
-            'follower_id' => $request['follower_id']
+            'follower_id' => Auth::user()->id
         ];
-
         return $this->followRepository->create($data);
     }
 }

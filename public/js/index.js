@@ -1,8 +1,7 @@
 const tweet = (url, tweet, $this) => {
     if(tweet != ''){
         axios.post(url, {
-            content: tweet,
-            user_id: window.userId
+            content: tweet
         })
         .then(function (response) {
             if(response.data.status == 'success'){
@@ -35,8 +34,7 @@ const tweet = (url, tweet, $this) => {
 
 const follow = (url, followedId, $this) => {
     axios.post(url, {
-        followed_id: followedId,
-        follower_id: window.userId
+        followed_id: followedId
     })
     .then(function (response) {
         if(response.data.status == 'success'){
